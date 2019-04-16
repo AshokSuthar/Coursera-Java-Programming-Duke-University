@@ -39,8 +39,15 @@ public class WeatherData {
         FileResource fr = new FileResource();
         CSVParser parser = fr.getCSVParser();
         CSVRecord coldestRecord = coldestHourInFile(parser);
+        String time;
+        try{
+            time = coldestRecord.get("TimeEST");
+        }
+        catch(java.lang.IllegalArgumentException e){
+            time = coldestRecord.get("TimeEDT");
+        }
         System.out.println("Coldest Temp was " + coldestRecord.get("TemperatureF")
-                + " and occured at " + coldestRecord.get("TimeEST"));
+                + " and occured at " + time);
 
     }
 
